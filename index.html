@@ -64,7 +64,7 @@ input,textarea,select{font-family:var(--ff)}
 .wrap-sm{max-width:860px;margin:0 auto;padding:0 20px}
 .page{display:none;animation:fadeIn .25s ease}
 .page.active{display:block}
-@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}@keyframes spin{to{transform:rotate(360deg)}}
 
 /* Top Bar */
 .topbar{background:var(--p);color:#fff;text-align:center;padding:7px 20px;font-size:13px;font-weight:500}
@@ -343,6 +343,15 @@ input:checked+.sl2::before{transform:translateX(16px)}
 .alert-info{background:#DBEAFE;border:1px solid #93C5FD;color:#1E40AF}
 .pr-bar{height:6px;background:var(--bdr);border-radius:3px;overflow:hidden;margin:6px 0}
 .pr-fill{height:100%;border-radius:3px;transition:width .4s ease}
+/* Contact subject buttons */
+.subj-btn{padding:10px 14px;border-radius:8px;border:1.5px solid var(--bdr);background:var(--bg);color:var(--t2);font-size:13px;font-weight:600;cursor:pointer;transition:all .2s ease;text-align:left;width:100%}
+.subj-btn:hover{border-color:var(--p);color:var(--p);background:var(--pl)}
+.active-subj{background:var(--p)!important;color:#fff!important;border-color:var(--p)!important}
+@media(max-width:600px){
+  #pg-contact .wrap>div{grid-template-columns:1fr!important}
+  #contactForm>div:first-of-type{grid-template-columns:1fr!important}
+  #subjectBtns{grid-template-columns:1fr 1fr!important}
+}
 </style>
 </head>
 <body>
@@ -773,43 +782,104 @@ input:checked+.sl2::before{transform:translateX(16px)}
 
 <!-- CONTACT PAGE -->
 <div class="page" id="pg-contact">
-  <div class="pg-hero"><h1>📬 Contact Us</h1><p>Have a question or suggestion? We'd love to hear from you.</p></div>
-  <div class="wrap">
-    <div class="cgrid">
+  <div style="background:linear-gradient(135deg,#0F172A 0%,#1E3A5F 50%,#0F172A 100%);padding:60px 0;text-align:center;position:relative;overflow:hidden">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 50%,rgba(37,99,235,.2) 0%,transparent 70%)"></div>
+    <div style="position:relative;z-index:1">
+      <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(37,99,235,.2);border:1px solid rgba(37,99,235,.4);color:#93C5FD;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 14px;border-radius:100px;margin-bottom:16px">📬 Get In Touch</div>
+      <h1 style="font-size:clamp(28px,5vw,48px);font-weight:800;color:#fff;letter-spacing:-.03em;margin-bottom:12px">How Can We Help You?</h1>
+      <p style="font-size:16px;color:rgba(255,255,255,.6);max-width:500px;margin:0 auto">Have a question, suggestion, or want to report a bug? Send us a message and we will get back to you.</p>
+    </div>
+  </div>
+
+  <div class="wrap" style="padding:60px 20px">
+    <div style="display:grid;grid-template-columns:1fr 1.6fr;gap:48px;max-width:1000px;margin:0 auto;align-items:start">
+
+      <!-- LEFT: Info Cards -->
       <div>
-        <h3 style="font-size:18px;font-weight:700;margin-bottom:14px">Send us a Message</h3>
-        <div class="alert alert-info" style="margin-bottom:16px;font-size:13px">📧 Messages will be sent directly to <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6105081718000f12091415040d085021060c00080d4f020e0c">[email&#160;protected]</a></strong></div>
-        <form action="https://formspree.io/f/mreyaall" method="POST" id="contactForm" onsubmit="handleFormSubmit(event)">
-          <input type="hidden" name="_replyto" value="divyanshuteli1@gmail.com">
-          <input type="hidden" name="_subject" id="form-subject-hidden" value="New Message from ToolHub Pro">
-          <div class="fg"><label class="fl">Full Name *</label><input type="text" class="fc" name="name" id="cf-name" placeholder="Your name" required></div>
-          <div class="fg"><label class="fl">Email Address *</label><input type="email" class="fc" name="email" id="cf-email" placeholder="your@email.com" required></div>
-          <div class="fg"><label class="fl">Subject</label>
-            <select class="fc" name="subject" id="cf-subject" onchange="document.getElementById('form-subject-hidden').value=this.value">
-              <option>Suggest a New Tool</option>
-              <option>Report a Bug</option>
-              <option>General Inquiry</option>
-              <option>Partnership</option>
-            </select>
+        <h2 style="font-size:20px;font-weight:800;margin-bottom:6px;letter-spacing:-.02em">Contact Information</h2>
+        <p style="font-size:14px;color:var(--t2);margin-bottom:24px;line-height:1.6">Fill out the form and our team will get back to you within 24 hours.</p>
+
+        <div style="background:linear-gradient(135deg,#1E3A5F,#0F172A);border-radius:16px;padding:28px;color:#fff">
+          <div style="display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.1)">
+            <div style="width:40px;height:40px;background:rgba(37,99,235,.3);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">⏰</div>
+            <div><div style="font-size:13px;font-weight:700;color:#93C5FD">Response Time</div><div style="font-size:13px;color:rgba(255,255,255,.7);margin-top:2px">Within 24 hours</div></div>
           </div>
-          <div class="fg"><label class="fl">Message *</label><textarea class="fc" name="message" id="cf-msg" rows="5" placeholder="Write your message here..." required></textarea></div>
-          <button type="submit" class="btn btn-p btn-full" id="cf-btn">📤 Send Message</button>
-          <div id="cf-status" style="margin-top:12px"></div>
-        </form>
+          <div style="display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.1)">
+            <div style="width:40px;height:40px;background:rgba(16,185,129,.3);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">💡</div>
+            <div><div style="font-size:13px;font-weight:700;color:#6EE7B7">Suggest a Tool</div><div style="font-size:13px;color:rgba(255,255,255,.7);margin-top:2px">We add new tools every week</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.1)">
+            <div style="width:40px;height:40px;background:rgba(245,158,11,.3);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🐛</div>
+            <div><div style="font-size:13px;font-weight:700;color:#FCD34D">Bug Reports</div><div style="font-size:13px;color:rgba(255,255,255,.7);margin-top:2px">We fix bugs within 48 hours</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:14px 0">
+            <div style="width:40px;height:40px;background:rgba(139,92,246,.3);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🤝</div>
+            <div><div style="font-size:13px;font-weight:700;color:#C4B5FD">Partnership</div><div style="font-size:13px;color:rgba(255,255,255,.7);margin-top:2px">Open for collaborations</div></div>
+          </div>
+        </div>
+
+        <!-- Social / Trust badges -->
+        <div style="margin-top:20px;background:var(--bg2);border:1.5px solid var(--bdr);border-radius:12px;padding:16px">
+          <div style="font-size:12px;font-weight:700;color:var(--tm);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px">Why Contact Us?</div>
+          <div style="font-size:13px;color:var(--t2);line-height:1.8">
+            ✅ 100+ tools, always improving<br>
+            ✅ Your feedback shapes our roadmap<br>
+            ✅ Quick, friendly responses<br>
+            ✅ We actually read every message
+          </div>
+        </div>
       </div>
-      <div>
-        <h3 style="font-size:18px;font-weight:700;margin-bottom:14px">Get in Touch</h3>
-        <p style="color:var(--t2);margin-bottom:20px;line-height:1.7">We typically respond within 24-48 hours. For urgent matters, please use the email below.</p>
-        <div class="cc"><div class="cc-ic">📧</div><div><h4>Email</h4><p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d5bdb0b9b9ba95a1babab9bda0b7a5a7bafbb6bab8">[email&#160;protected]</a></p></div></div>
-        <div class="cc"><div class="cc-ic">🌐</div><div><h4>Website</h4><p>www.toolhubpro.com</p></div></div>
-        <div class="cc"><div class="cc-ic">⏰</div><div><h4>Response Time</h4><p>Within 24-48 hours</p></div></div>
-        <div class="cc"><div class="cc-ic">💬</div><div><h4>Want to Advertise?</h4><p>Contact us for banner ad and sponsored placement rates.</p></div></div>
+
+      <!-- RIGHT: Form -->
+      <div style="background:#fff;border:1.5px solid var(--bdr);border-radius:20px;padding:36px;box-shadow:0 8px 32px rgba(0,0,0,.08)">
+        <h3 style="font-size:20px;font-weight:800;margin-bottom:4px;letter-spacing:-.02em">Send a Message</h3>
+        <p style="font-size:13px;color:var(--tm);margin-bottom:24px">All fields marked * are required.</p>
+
+        <form action="https://formspree.io/f/mreyaall" method="POST" id="contactForm" onsubmit="handleFormSubmit(event)">
+          <input type="hidden" name="_subject" id="form-subject-hidden" value="New Message - ToolHub Pro">
+
+          <!-- Name + Email row -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+            <div>
+              <label class="fl">Full Name *</label>
+              <input type="text" class="fc" name="name" id="cf-name" placeholder="Your name" required style="margin-top:5px">
+            </div>
+            <div>
+              <label class="fl">Email Address *</label>
+              <input type="email" class="fc" name="email" id="cf-email" placeholder="your@email.com" required style="margin-top:5px">
+            </div>
+          </div>
+
+          <!-- Subject -->
+          <div style="margin-bottom:14px">
+            <label class="fl">Subject *</label>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px" id="subjectBtns">
+              <button type="button" class="subj-btn active-subj" onclick="setSubject(this,'Suggest a New Tool')">💡 Suggest Tool</button>
+              <button type="button" class="subj-btn" onclick="setSubject(this,'Bug Report')">🐛 Bug Report</button>
+              <button type="button" class="subj-btn" onclick="setSubject(this,'General Inquiry')">💬 General</button>
+              <button type="button" class="subj-btn" onclick="setSubject(this,'Partnership')">🤝 Partnership</button>
+            </div>
+            <input type="hidden" name="subject" id="cf-subject" value="Suggest a New Tool">
+          </div>
+
+          <!-- Message -->
+          <div style="margin-bottom:20px">
+            <label class="fl">Message *</label>
+            <textarea class="fc" name="message" id="cf-msg" rows="5" placeholder="Write your message here... Be as detailed as possible so we can help you better." required style="margin-top:5px;resize:none"></textarea>
+            <div style="text-align:right;font-size:11px;color:var(--tm);margin-top:4px" id="charCount">0 / 1000</div>
+          </div>
+
+          <!-- Submit -->
+          <button type="submit" class="btn btn-p btn-full" id="cf-btn" style="height:48px;font-size:15px;border-radius:10px">
+            <span id="cf-btn-text">📤 Send Message</span>
+          </button>
+          <div id="cf-status" style="margin-top:14px"></div>
+        </form>
       </div>
     </div>
   </div>
 </div>
 
-<!-- PRIVACY POLICY -->
 <div class="page" id="pg-privacy">
   <div class="pg-hero"><h1>🔒 Privacy Policy</h1><p>Last updated: January 2025</p></div>
   <div class="wrap">
@@ -1324,11 +1394,21 @@ const BLOG_POSTS = [
 let currentPage = 'home';
 
 function navigate(page) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.page').forEach(p => {
+    p.classList.remove('active');
+    p.style.display = 'none';
+  });
   const el = document.getElementById('pg-' + page);
-  if (el) { el.classList.add('active'); currentPage = page; }
-  window.scrollTo(0,0);
-  document.getElementById('mnav').classList.remove('on');
+  if (el) {
+    el.classList.add('active');
+    el.style.display = 'block';
+    currentPage = page;
+  }
+  window.scrollTo(0, 0);
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+  const mn = document.getElementById('mnav');
+  if (mn) mn.classList.remove('on');
   document.querySelectorAll('.hnav a').forEach(a => a.classList.remove('act'));
   const na = document.getElementById('nav-' + page);
   if (na) na.classList.add('act');
@@ -1339,13 +1419,13 @@ function nav2(page) {
 }
 
 function openTool(id) {
-  const tool = TOOLS.find(t => t.id === id);
-  if (!tool) return;
-  // Check if dedicated page exists
-  const dedicated = document.getElementById('pg-' + id);
-  if (dedicated) { navigate(id); setupToolPage(id); return; }
-  // Otherwise show generic tool page
-  showGenericTool(tool);
+  try {
+    const tool = TOOLS.find(t => t.id === id);
+    if (!tool) return;
+    const dedicated = document.getElementById('pg-' + id);
+    if (dedicated) { navigate(id); setupToolPage(id); return; }
+    showGenericTool(tool);
+  } catch(e) { console.error('openTool error:', e); }
 }
 
 function scrollToCat(id) {
@@ -2190,12 +2270,34 @@ function renderBlog() {
 }
 
 // ── CONTACT FORM ─────────────────────────────────────────────
+function setSubject(btn, subject) {
+  document.querySelectorAll('.subj-btn').forEach(b => b.classList.remove('active-subj'));
+  btn.classList.add('active-subj');
+  document.getElementById('cf-subject').value = subject;
+  document.getElementById('form-subject-hidden').value = 'ToolHub Pro: ' + subject;
+}
+
+// Char counter for message
+document.addEventListener('DOMContentLoaded', () => {
+  const msg = document.getElementById('cf-msg');
+  const cnt = document.getElementById('charCount');
+  if (msg && cnt) {
+    msg.addEventListener('input', () => {
+      const len = msg.value.length;
+      cnt.textContent = len + ' / 1000';
+      if (len > 900) cnt.style.color = 'var(--err)';
+      else cnt.style.color = 'var(--tm)';
+      if (len > 1000) msg.value = msg.value.slice(0, 1000);
+    });
+  }
+});
+
 async function handleFormSubmit(e) {
   e.preventDefault();
   const btn = document.getElementById('cf-btn');
   const st = document.getElementById('cf-status');
   const form = document.getElementById('contactForm');
-  btn.textContent = '⏳ Sending...';
+  btn.innerHTML = '<span style="display:flex;align-items:center;gap:8px;justify-content:center"><svg style="animation:spin 1s linear infinite;width:18px;height:18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" stroke-opacity=".25"/><path d="M12 2a10 10 0 0 1 10 10" stroke-opacity="1"/></svg> Sending...</span>';
   btn.disabled = true;
   try {
     const res = await fetch(form.action, {
@@ -2204,17 +2306,38 @@ async function handleFormSubmit(e) {
       headers: { 'Accept': 'application/json' }
     });
     if (res.ok) {
-      st.innerHTML = '<div class="alert alert-ok">✅ Message sent! Divyanshu will reply to <strong>' + document.getElementById('cf-email').value + '</strong> within 24 hours.</div>';
+      st.innerHTML = '<div class="alert alert-ok" style="padding:16px;border-radius:10px;display:flex;align-items:flex-start;gap:12px"><span style="font-size:24px">✅</span><div><strong>Message Sent Successfully!</strong><br><span style="font-size:13px;opacity:.8">We have received your message and will get back to you within 24 hours.</span></div></div>';
       form.reset();
+      document.querySelectorAll('.subj-btn').forEach((b,i) => { b.classList.remove('active-subj'); if(i===0) b.classList.add('active-subj'); });
+      document.getElementById('charCount').textContent = '0 / 1000';
     } else {
-      st.innerHTML = '<div class="alert alert-warn">⚠️ Something went wrong. Please email directly: <a href="mailto:divyanshuteli1@gmail.com">divyanshuteli1@gmail.com</a></div>';
+      st.innerHTML = '<div class="alert alert-warn">⚠️ Something went wrong. Please try again in a moment.</div>';
     }
   } catch(err) {
-    st.innerHTML = '<div class="alert alert-warn">⚠️ No internet? Email directly: <a href="mailto:divyanshuteli1@gmail.com">divyanshuteli1@gmail.com</a></div>';
+    st.innerHTML = '<div class="alert alert-warn">⚠️ Connection error. Please check your internet and try again.</div>';
   }
-  btn.textContent = '📤 Send Message';
+  btn.innerHTML = '<span id="cf-btn-text">📤 Send Message</span>';
   btn.disabled = false;
 }
 function submitContact() {}
 
-// ── INIT ───────────────�
+// ── INIT ───────────────
+document.getElementById('yr').textContent = new Date().getFullYear();
+renderHome();
+renderBlog();
+
+// Init: hide all pages except active home page
+document.querySelectorAll('.page').forEach(p => {
+  p.style.display = p.classList.contains('active') ? 'block' : 'none';
+});
+
+// Set today as max date for age calculator
+const todayDate = new Date().toISOString().split('T')[0];
+const dobEl = document.getElementById('ac-dob');
+if (dobEl) dobEl.max = todayDate;
+
+// Generate initial password
+genPG();
+</script>
+</body>
+</html>
